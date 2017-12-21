@@ -1,5 +1,7 @@
 <div>
   <img [src]="song.thumbnails.default.url" alt="">
   <span>{{song.description}}</span>
-  <button (click)="download(song.id)">Download</button>
+  <button (click)="download(song.id)" [disabled]="downloading">Download</button>
+  <button (click)="play(song.id)">Play</button>
+  <button (click)="stop()">Stop</button>
 </div>
