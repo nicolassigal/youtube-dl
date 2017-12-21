@@ -2,5 +2,17 @@
   "/api": {
     "target": "http://localhost:8080",
     "secure": false
+  },
+  "/api/search/:query": {
+    "target": "http://localhost:8080/search/:query",
+    "secure": false
+  },
+  "/api/download/": {
+    "target": "http://localhost:8080/download/",
+    "secure": false
+  },
+  "/api/download/:id": {
+    "target": "http://localhost:8080/download/:id",
+    "secure": false
   }
 }

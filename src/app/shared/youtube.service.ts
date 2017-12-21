@@ -1,25 +1,27 @@
 import { Injectable } from '@angular/core';
-import * as youtubeSearch from 'youtube-search';
 import { Subject } from 'rxjs/Subject';
+import { HttpClient } from '@angular/common/http';
 
 @Injectable()
 export class YoutubeService {
   opts = { maxResults: 50, key: 'AIzaSyCnqAFM5z0dsC_gPE-DQeFrQe2PScejMMw' };
   results: Array<any> = [];
   searchSubject: Subject<any> = new Subject<any>();
-  constructor() { }
+  constructor(private http: HttpClient) { }
 
   __getResults = () => {
     return this.results;
   }
 
+  _download = (id: string) => {
+    this.http.get('http://localhost:4200/api/download/' + id).subscribe(response => {
+      console.log(response);
+    });
+  }
+
   _search = (query: string) => {
-    youtubeSearch(query, this.opts, (err, results) => {
-      if (err) {
-        return console.log(err);
-      }
-      this.results = results;
-      this.searchSubject.next(this.results);
+    return this.http.get('http://localhost:4200/api/search/' + query).subscribe((response: any) => {
+      this.searchSubject.next(response);
     });
   }
 }

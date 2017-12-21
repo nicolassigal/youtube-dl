@@ -4,7 +4,7 @@
   "license": "MIT",
   "scripts": {
     "ng": "ng",
-    "start": "ng serve",
+    "start": "ng serve --proxy-config proxy.conf.json",
     "api": "node server/server.js",
     "build": "ng build --prod",
     "test": "ng test",
@@ -24,7 +24,9 @@
     "@angular/router": "^5.0.0",
     "core-js": "^2.4.1",
     "express": "^4.16.2",
+    "fyda": "^1.0.2",
     "rxjs": "^5.5.2",
+    "youtube-mp3-downloader": "^0.5.2",
     "youtube-search": "^1.0.10",
     "zone.js": "^0.8.14"
   },

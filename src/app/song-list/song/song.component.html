@@ -1,4 +1,5 @@
 <div>
   <img [src]="song.thumbnails.default.url" alt="">
-  <a [href]="song.link">{{song.description}}</a>
+  <span>{{song.description}}</span>
+  <button (click)="download(song.id)">Download</button>
 </div>
