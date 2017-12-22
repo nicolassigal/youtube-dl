@@ -29,7 +29,7 @@ enableStop = false;
     this.ytService._getlink(id).subscribe((res: any) => {
       if(res.ok) {
         this.data = res.data;
-        this.song.downloadLink = `api/download/${this.data.videoTitle}.mp3`;
+        this.song.downloadLink = `https://ytser.herokuapp.com/api/download/${this.data.videoTitle}.mp3`;
         this.downloadFile(this.song.downloadLink);
       }
     });
