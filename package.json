@@ -4,7 +4,9 @@
   "license": "MIT",
   "scripts": {
     "ng": "ng",
-    "start": "node server.js",
+    "start": "http-server dist/",
+    "preinstall": "npm install -g http-server",
+    "postinstall": "ng build --prod",
     "proxy": "ng serve --proxy-config proxy.conf.json",
     "api": "node server.js",
     "build": "ng build --prod",
