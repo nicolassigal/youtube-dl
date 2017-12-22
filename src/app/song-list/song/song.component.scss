@@ -1,0 +1,17 @@
+.card {
+  display: flex;
+  flex-direction: row;
+  height: 250px;
+  img {
+    width: 100%;
+  }
+  .right {
+    display:flex;
+    flex-direction: column;
+    button {
+      width: 250px;
+      background: gray;
+      color: white;
+    }
+  }
+}

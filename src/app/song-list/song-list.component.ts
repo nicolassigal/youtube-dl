@@ -14,7 +14,7 @@ export class SongListComponent implements OnInit {
     this.results = this.ytService.__getResults();
     this.ytService.searchSubject.subscribe(results => {
       this.results = results;
-      console.log(this.results);
+      console.log(results);
     });
   }
 

@@ -14,20 +14,18 @@ export class YoutubeService {
     return this.results;
   }
 
-  _download = (id: string) => {
-    return this.http.get(`/api/download/${id}`).map(response => response);
+  _download = (name: string) => {
+    this.http.get(`api/download/${name}`).subscribe((res: any) => {
+      console.log(res);
+    });
   }
 
-  _stop = () => {
-    return this.http.get(`/api/stop/`).map(response => response);
-  }
-
-  _play = (id: string) => {
-    return this.http.get(`/api/play/${id}`).map(response => response);
+  _getlink = (id: string) => {
+    return this.http.get(`api/getlink/${id}`).map(response => response);
   }
 
   _search = (query: string) => {
-    return this.http.get(`/api/search/${query}`).subscribe((response: any) => {
+    return this.http.get(`api/search/${query}`).subscribe((response: any) => {
       this.searchSubject.next(response);
     });
   }

@@ -3,11 +3,8 @@ var ffmpeg = require('@ffmpeg-installer/ffmpeg');
 var YoutubeMp3Downloader = require("youtube-mp3-downloader");
 var path = require('path');
 var http = require('http');
-const stream = require('youtube-audio-stream')
-const decoder = require('lame').Decoder
-const speaker = require('speaker')
+
 var streamUrl;
-//var downloader = require('spotify-playlist-downloader');
 
 var opts = {
  maxResults: 10,
@@ -41,29 +38,7 @@ router.get('/search/:query', function(req, res) {
     res.json(results);
    });
 });
-router.get('/play/:id', function(req, res) {
-  if(isPlaying) {
-    isPlaying = false;
-    try {
-      streamUrl.close();
-    } catch (exception) {
-      console.log(exception);
-    }
-  }
-  isPlaying = true;
-  streamUrl = stream('http://youtube.com/watch?v='+req.params.id).pipe(decoder()).pipe(speaker());
-});
 
-router.get('/stop/', function(req, res) {
-  isPlaying = false;
-  if(streamUrl){
-    try {
-      streamUrl.close();
-    } catch (exception) {
-      console.log(exception);
-    }
-  }
-});
 
 router.get('/download/:id', function(req, res) {
   YD.download(req.params.id);

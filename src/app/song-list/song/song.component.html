@@ -1,7 +1,11 @@
-<div>
-  <img [src]="song.thumbnails.default.url" alt="">
-  <span>{{song.description}}</span>
-  <button (click)="download(song.id)" [disabled]="downloading">Download</button>
-  <button (click)="play(song.id)">Play</button>
-  <button (click)="stop()">Stop</button>
+<div class="card" *ngIf="song.kind == 'youtube#video'">
+  <div class="left">
+    <img [src]="song.thumbnails.medium.url" (click)="replace = true" *ngIf="!replace" alt="">
+    <iframe class="player" [src]="song.link" *ngIf="replace"></iframe>
+  </div>
+  <div class="right">
+    <h3>{{song.title}}</h3>
+    <h4>{{song.description}}</h4>
+    <button (click)="download(song.id)" [disabled]="downloading">Get Mp3</button>
+  </div>
 </div>

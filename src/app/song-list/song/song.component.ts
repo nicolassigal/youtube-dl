@@ -1,3 +1,4 @@
+import { DomSanitizer } from '@angular/platform-browser';
 import { Component, Input, OnInit } from '@angular/core';
 import { YoutubeService } from '../../shared/youtube.service';
 
@@ -10,30 +11,26 @@ export class SongComponent implements OnInit {
 @Input('song') song;
 downloading = false;
 data;
+replace = false;
 enableStop = false;
-  constructor(private ytService: YoutubeService) { }
-
+  constructor(private ytService: YoutubeService, private sanitizer: DomSanitizer) { }
   ngOnInit() {
+    this.song.link = this.sanitizer.bypassSecurityTrustResourceUrl(`https://www.youtube.com/embed/${this.song.id}`);
   }
 
-  play = (id) => {
-    this.ytService._play(id).subscribe((res: any) => {
-      this.enableStop = true;
-    });
-  }
-  stop = () => {
-    this.ytService._stop().subscribe((res: any) => {
-      this.enableStop = false;
-    });
+  downloadFile = (filePath) => {
+    const link = document.createElement('a');
+    link.href = filePath;
+    link.click();
   }
 
   download = (id) => {
     this.downloading = true;
-    this.ytService._download(id).subscribe((res: any) => {
-      console.log(res);
+    this.ytService._getlink(id).subscribe((res: any) => {
       if(res.ok) {
         this.data = res.data;
-        this.downloading = false;
+        this.song.downloadLink = `api/download/${this.data.videoTitle}.mp3`;
+        this.downloadFile(this.song.downloadLink);
       }
     });
   }

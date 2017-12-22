@@ -1,18 +1,10 @@
 {
   "/api": {
-    "target": "http://localhost:5500",
-    "secure": false
+    "target": "https://ytser.herokuapp.com/api",
+    "secure": true,
+    "pathRewrite": {
+    "^/api": ""
   },
-  "/api/search/:query": {
-    "target": "http://localhost:5500/search/:query",
-    "secure": false
-  },
-  "/api/download/": {
-    "target": "http://localhost:5500/download/",
-    "secure": false
-  },
-  "/api/download/:id": {
-    "target": "http://localhost:5500/download/:id",
-    "secure": false
+    "changeOrigin": true
   }
 }

@@ -8,10 +8,12 @@ import { YoutubeService } from '../shared/youtube.service';
 })
 export class SearchBoxComponent implements OnInit {
   query: string;
+  dir;
   constructor(private ytService: YoutubeService) { }
 
   ngOnInit() {
   }
+
 
   search = () => {
     this.ytService._search(this.query);
