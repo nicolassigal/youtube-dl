@@ -15,17 +15,17 @@ export class YoutubeService {
   }
 
   _download = (name: string) => {
-    this.http.get(`api/download/${name}`).subscribe((res: any) => {
+    this.http.get(`https://ytser.herokuapp.com/api/download/${name}`).subscribe((res: any) => {
       console.log(res);
     });
   }
 
   _getlink = (id: string) => {
-    return this.http.get(`api/getlink/${id}`).map(response => response);
+    return this.http.get(`https://ytser.herokuapp.com/api/getlink/${id}`).map(response => response);
   }
 
   _search = (query: string) => {
-    return this.http.get(`api/search/${query}`).subscribe((response: any) => {
+    return this.http.get(`https://ytser.herokuapp.com/api/search/${query}`).subscribe((response: any) => {
       this.searchSubject.next(response);
     });
   }
