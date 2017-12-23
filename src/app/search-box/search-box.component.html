@@ -1,3 +1,5 @@
-<input type="text" [(ngModel)]="query" placeholder="Buscar Cancion">
-<button (click)="search()"><i class="fa fa-search"></i></button>
+<form>
+    <input type="text" [(ngModel)]="query" placeholder="Buscar Cancion">
+    <button type="submit" (click)="search()"><i class="fa fa-search"></i></button>
+</form>
 <yd-spinner *ngIf="loading"></yd-spinner>
