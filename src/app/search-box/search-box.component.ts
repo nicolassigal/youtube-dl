@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { YoutubeService } from '../shared/youtube.service';
-
+declare var $;
 @Component({
   selector: 'yd-search-box',
   templateUrl: './search-box.component.html',
@@ -18,6 +18,7 @@ export class SearchBoxComponent implements OnInit {
 
   search = () => {
     this.loading = true;
+    $('.spinner-container').focus();
     this.ytService._search(this.query).subscribe(() => {
       this.loading = false;
     });
