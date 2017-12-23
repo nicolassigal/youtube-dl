@@ -8,7 +8,8 @@ import { YoutubeService } from '../shared/youtube.service';
 })
 export class SearchBoxComponent implements OnInit {
   query: string;
-  dir;
+  loading = false;
+
   constructor(private ytService: YoutubeService) { }
 
   ngOnInit() {
@@ -16,7 +17,10 @@ export class SearchBoxComponent implements OnInit {
 
 
   search = () => {
-    this.ytService._search(this.query);
+    this.loading = true;
+    this.ytService._search(this.query).subscribe(() => {
+      this.loading = false;
+    });
   }
 
 }

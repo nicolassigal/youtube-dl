@@ -12,26 +12,22 @@ export class SongComponent implements OnInit {
 downloading = false;
 data;
 replace = false;
+status = 0;
 enableStop = false;
   constructor(private ytService: YoutubeService, private sanitizer: DomSanitizer) { }
   ngOnInit() {
     this.song.link = this.sanitizer.bypassSecurityTrustResourceUrl(`https://www.youtube.com/embed/${this.song.id}`);
-  }
-
-  downloadFile = (filePath) => {
-    const link = document.createElement('a');
-    link.href = filePath;
-    link.click();
+    this.ytService.finishRequest.subscribe(id => {
+      if(this.song.id === id){
+        this.downloading = false;
+        this.status = 2;
+      }
+    })
   }
 
   download = (id) => {
+    this.status = 1;
     this.downloading = true;
-    this.ytService._getlink(id).subscribe((res: any) => {
-      if(res.ok) {
-        this.data = res.data;
-        this.song.downloadLink = `https://ytser.herokuapp.com/api/download/${this.data.videoTitle}.mp3`;
-        this.downloadFile(this.song.downloadLink);
-      }
-    });
+    this.ytService._getlink(id);
   }
 }
