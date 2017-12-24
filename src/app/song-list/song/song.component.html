@@ -4,7 +4,7 @@
   </div>
   <div class="images">
     <img [src]="song.thumbnails.medium.url" (click)="replace = true" *ngIf="!replace" alt="">
-    <iframe class="player" [src]="song.link" *ngIf="replace" frameborder="0" allowfullscreen></iframe>
+    <iframe class="player" [src]="song.link" *ngIf="replace" frameborder="0" gesture="media" allow="encrypted-media"  allowfullscreen></iframe>
   </div>
   <div class="download">
     <button (click)="download(song.id)" [disabled]="downloading" [disabled]="downloading">
