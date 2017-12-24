@@ -8,17 +8,23 @@ import { forkJoin } from 'rxjs/observable/forkJoin';
 export class YoutubeService  {
   opts = { maxResults: 50, key: 'AIzaSyCnqAFM5z0dsC_gPE-DQeFrQe2PScejMMw' };
   results: Array<any> = [];
-  requests: Array<Observable<any>> = [];
-
+  requests: Array<any> = [];
   searchSubject: Subject<any> = new Subject<any>();
   requestSubject: Subject<any> = new Subject<any>();
   finishRequest: Subject<any> = new Subject<any>();
   constructor(private http: HttpClient) {
-    this.requestSubject.subscribe(() => {
-      forkJoin(this.requests).subscribe((file: any) => {
-        this.requests.shift();
-        this.downloadFile( `https://ytser.herokuapp.com/api/download/${file[0].data.videoTitle}.mp3`);
-        this.finishRequest.next(file[0].data.videoId);
+    this.requestSubject.subscribe((id) => {
+      this.requests.map(request => {
+        const req = this.requests.filter((obs: any, index) => {
+          if (obs.id === id) {
+            this.requests.splice(index, 1);
+          }
+        });
+        request.url.subscribe((file: any) => {
+          this.downloadFile( `https://ytser.herokuapp.com/api/download/${file.data.videoTitle}.mp3`);
+          console.log(this.requests);
+          this.finishRequest.next(file.data.videoId);
+        });
       });
     });
    }
@@ -40,8 +46,13 @@ export class YoutubeService  {
   }
 
   _getlink = (id: string) => {
-    this.requests.push( this.http.get(`https://ytser.herokuapp.com/api/getlink/${id}`));
-    this.requestSubject.next();
+    const req = {
+      url:  this.http.get(`https://ytser.herokuapp.com/api/getlink/${id}`),
+      id: id
+    };
+
+    this.requests.push(req);
+    this.requestSubject.next(id);
   }
 
   _search = (query: string) => {
@@ -49,21 +60,4 @@ export class YoutubeService  {
       this.searchSubject.next(response);
     });
   }
-
-  doUsersRequest(queryArr, previousObservable = null) {
-    if (queryArr.length) {
-        const url = 'https://ytser.herokuapp.com/api/getlink/' + queryArr.shift().id;
-        let observable = null;
-        if (previousObservable) {
-            observable = previousObservable.flatMap(() => {
-                return this.http.get(url);
-            });
-        } else {
-            observable = this.http.get(url);
-        }
-        return this.doUsersRequest(queryArr, observable);
-    } else {
-        return previousObservable;
-    }
-}
 }

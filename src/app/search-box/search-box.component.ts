@@ -1,6 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { YoutubeService } from '../shared/youtube.service';
-declare var $;
 @Component({
   selector: 'yd-search-box',
   templateUrl: './search-box.component.html',
@@ -9,7 +8,7 @@ declare var $;
 export class SearchBoxComponent implements OnInit {
   query: string;
   loading = false;
-
+  @ViewChild('searchElement') searchElement;
   constructor(private ytService: YoutubeService) { }
 
   ngOnInit() {
@@ -18,7 +17,7 @@ export class SearchBoxComponent implements OnInit {
 
   search = () => {
     this.loading = true;
-    $('.spinner-container').focus();
+    this.searchElement.nativeElement.blur();
     this.ytService._search(this.query).subscribe(() => {
       this.loading = false;
     });
