@@ -14,15 +14,15 @@ export class YoutubeService  {
   requestSubject: Subject<any> = new Subject<any>();
   finishRequest: Subject<any> = new Subject<any>();
   constructor(private http: HttpClient) {
-    this.requestSubject.subscribe((id) => {
+    this.requestSubject.subscribe((song) => {
       this.requests.map(request => {
         const req = this.requests.filter((obs: any, index) => {
-          if (obs.id === id) {
+          if (obs.id === song.id) {
             this.requests.splice(index, 1);
           }
         });
         request.url.subscribe((file: any) => {
-          this.downloadFile( `https://ytser.herokuapp.com/api/download/${file.data.videoTitle}.mp3`);
+          this.downloadFile( `https://ytser.herokuapp.com/api/download/${request.song.title}.mp3`);
           console.log(this.requests);
           this.finishRequest.next(file.data.videoId);
         });
@@ -46,14 +46,14 @@ export class YoutubeService  {
     });
   }
 
-  _getlink = (id) => {
+  _getlink = (song) => {
     const req = {
-      url: this.http.get(`https://ytser.herokuapp.com/api/getlink/${id}`),
-      id: id
+      url: this.http.get(`https://ytser.herokuapp.com/api/getlink/${song.id}`),
+      song: song
     };
 
     this.requests.push(req);
-    this.requestSubject.next(id);
+    this.requestSubject.next(song);
   }
 
   _search = (query: string) => {

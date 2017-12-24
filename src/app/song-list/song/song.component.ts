@@ -29,6 +29,6 @@ enableStop = false;
   download = (song) => {
     this.status = 1;
     this.downloading = true;
-    this.ytService._getlink(song.id);
+    this.ytService._getlink(song);
   }
 }

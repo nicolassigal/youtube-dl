@@ -21,8 +21,7 @@ import { SpinnerComponent } from './spinner/spinner.component';
   imports: [
     BrowserModule,
     HttpClientModule,
-    FormsModule
-    ],
+    FormsModule  ],
   providers: [YoutubeService],
   bootstrap: [AppComponent]
 })
