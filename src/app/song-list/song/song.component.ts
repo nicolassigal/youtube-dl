@@ -22,12 +22,14 @@ enableStop = false;
         this.downloading = false;
         this.status = 2;
       }
-    })
+    });
   }
 
-  download = (id) => {
+  download = (song) => {
     this.status = 1;
     this.downloading = true;
-    this.ytService._getlink(id);
+    this.ytService._getlink(song.id).subscribe((file: any) => {
+      this.ytService._download(file.data.videoTitle);
+    });
   }
 }

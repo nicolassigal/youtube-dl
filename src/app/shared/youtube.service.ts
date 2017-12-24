@@ -4,6 +4,7 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
 import { forkJoin } from 'rxjs/observable/forkJoin';
+
 @Injectable()
 export class YoutubeService  {
   opts = { maxResults: 50, key: 'AIzaSyCnqAFM5z0dsC_gPE-DQeFrQe2PScejMMw' };
@@ -13,7 +14,7 @@ export class YoutubeService  {
   requestSubject: Subject<any> = new Subject<any>();
   finishRequest: Subject<any> = new Subject<any>();
   constructor(private http: HttpClient) {
-    this.requestSubject.subscribe((id) => {
+    /*this.requestSubject.subscribe((id) => {
       this.requests.map(request => {
         const req = this.requests.filter((obs: any, index) => {
           if (obs.id === id) {
@@ -26,7 +27,7 @@ export class YoutubeService  {
           this.finishRequest.next(file.data.videoId);
         });
       });
-    });
+    });*/
    }
 
    downloadFile = (filePath) => {
@@ -45,14 +46,8 @@ export class YoutubeService  {
     });
   }
 
-  _getlink = (id: string) => {
-    const req = {
-      url:  this.http.get(`https://ytser.herokuapp.com/api/getlink/${id}`),
-      id: id
-    };
-
-    this.requests.push(req);
-    this.requestSubject.next(id);
+  _getlink = (song) => {
+    return this.http.get(`https://ytser.herokuapp.com/api/getlink/${song.id}`);
   }
 
   _search = (query: string) => {
