@@ -47,7 +47,13 @@ export class YoutubeService  {
   }
 
   _getlink = (id) => {
-    return this.http.get(`https://ytser.herokuapp.com/api/getlink/${id}`);
+    const req = {
+      url: this.http.get(`https://ytser.herokuapp.com/api/getlink/${id}`),
+      id: id
+    };
+
+    this.requests.push(req);
+    this.requestSubject.next(id);
   }
 
   _search = (query: string) => {
