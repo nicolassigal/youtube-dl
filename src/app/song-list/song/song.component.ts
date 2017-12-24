@@ -1,5 +1,5 @@
 import { DomSanitizer } from '@angular/platform-browser';
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, ViewChild } from '@angular/core';
 import { YoutubeService } from '../../shared/youtube.service';
 
 @Component({
@@ -9,6 +9,7 @@ import { YoutubeService } from '../../shared/youtube.service';
 })
 export class SongComponent implements OnInit {
 @Input('song') song;
+@ViewChild('card') card;
 downloading = false;
 data;
 replace = false;
@@ -23,6 +24,13 @@ enableStop = false;
         this.status = 2;
       }
     });
+  }
+
+  replaceImg = () => {
+    this.replace = true;
+    setTimeout(() => {
+      this.card.nativeElement.querySelector('iframe').nativeElement.querySelector('ytp-button').click();
+    }, 3000);
   }
 
   download = (song) => {

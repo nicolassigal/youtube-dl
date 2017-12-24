@@ -46,8 +46,8 @@ export class YoutubeService  {
     });
   }
 
-  _getlink = (song) => {
-    return this.http.get(`https://ytser.herokuapp.com/api/getlink/${song.id}`);
+  _getlink = (id) => {
+    return this.http.get(`https://ytser.herokuapp.com/api/getlink/${id}`);
   }
 
   _search = (query: string) => {
