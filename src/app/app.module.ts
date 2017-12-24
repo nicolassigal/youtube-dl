@@ -9,7 +9,6 @@ import { SongComponent } from './song-list/song/song.component';
 import { YoutubeService } from './shared/youtube.service';
 import { NavbarComponent } from './navbar/navbar.component';
 import { SpinnerComponent } from './spinner/spinner.component';
-
 @NgModule({
   declarations: [
     AppComponent,
@@ -23,7 +22,7 @@ import { SpinnerComponent } from './spinner/spinner.component';
     BrowserModule,
     HttpClientModule,
     FormsModule
-  ],
+    ],
   providers: [YoutubeService],
   bootstrap: [AppComponent]
 })

@@ -26,18 +26,9 @@ enableStop = false;
     });
   }
 
-  replaceImg = () => {
-    this.replace = true;
-    setTimeout(() => {
-      this.card.nativeElement.querySelector('iframe').nativeElement.querySelector('ytp-button').click();
-    }, 3000);
-  }
-
   download = (song) => {
     this.status = 1;
     this.downloading = true;
-    this.ytService._getlink(song.id).subscribe((file: any) => {
-      this.ytService._download(file.data.videoTitle);
-    });
+    this.ytService._getlink(song.id);
   }
 }

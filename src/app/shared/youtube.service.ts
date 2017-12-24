@@ -14,7 +14,7 @@ export class YoutubeService  {
   requestSubject: Subject<any> = new Subject<any>();
   finishRequest: Subject<any> = new Subject<any>();
   constructor(private http: HttpClient) {
-    /*this.requestSubject.subscribe((id) => {
+    this.requestSubject.subscribe((id) => {
       this.requests.map(request => {
         const req = this.requests.filter((obs: any, index) => {
           if (obs.id === id) {
@@ -27,7 +27,7 @@ export class YoutubeService  {
           this.finishRequest.next(file.data.videoId);
         });
       });
-    });*/
+    });
    }
 
    downloadFile = (filePath) => {
