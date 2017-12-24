@@ -16,9 +16,9 @@ status = 0;
 enableStop = false;
   constructor(private ytService: YoutubeService, private sanitizer: DomSanitizer) { }
   ngOnInit() {
-    this.song.link = this.sanitizer.bypassSecurityTrustResourceUrl(`http://www.youtube.com/embed/${this.song.id}?autoplay=1`);
+    this.song.link = this.sanitizer.bypassSecurityTrustResourceUrl(`https://www.youtube.com/embed/${this.song.id}?autoplay=1`);
     this.ytService.finishRequest.subscribe(id => {
-      if(this.song.id === id){
+      if (this.song.id === id) {
         this.downloading = false;
         this.status = 2;
       }

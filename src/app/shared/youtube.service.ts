@@ -20,10 +20,10 @@ export class YoutubeService  {
             this.requests.splice(index, 1);
           }
         });
-        request.url.subscribe((file: any) => {
-          this.downloadFile( `https://ytser.herokuapp.com/api/download/${file.data.videoTitle}.mp3`);
+        request.url.subscribe(() => {
+          this.downloadFile( `https://ytser.herokuapp.com/api/download/${request.name}.mp3`);
           console.log(this.requests);
-          this.finishRequest.next(file.data.videoId);
+          this.finishRequest.next(request.id);
         });
       });
     });
@@ -45,14 +45,15 @@ export class YoutubeService  {
     });
   }
 
-  _getlink = (id: string) => {
+  _getlink = (video) => {
     const req = {
-      url:  this.http.get(`https://ytser.herokuapp.com/api/getlink/${id}`),
-      id: id
+      url:  this.http.get(`https://ytser.herokuapp.com/api/getlink/${video.id}`),
+      id: video.id,
+      name: video.title
     };
 
     this.requests.push(req);
-    this.requestSubject.next(id);
+    this.requestSubject.next(video.id);
   }
 
   _search = (query: string) => {
