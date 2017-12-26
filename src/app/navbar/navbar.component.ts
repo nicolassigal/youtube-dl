@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { YoutubeService } from '../shared/youtube.service';
 
 @Component({
   selector: 'yd-navbar',
@@ -6,10 +7,13 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./navbar.component.scss']
 })
 export class NavbarComponent implements OnInit {
-
-  constructor() { }
+  size: 0;
+  constructor(private ytService: YoutubeService) { }
 
   ngOnInit() {
+    this.ytService.queueSubject.subscribe(size => {
+      this.size = size;
+    });
   }
 
 }

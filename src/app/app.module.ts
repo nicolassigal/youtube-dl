@@ -9,6 +9,11 @@ import { SongComponent } from './song-list/song/song.component';
 import { YoutubeService } from './shared/youtube.service';
 import { NavbarComponent } from './navbar/navbar.component';
 import { SpinnerComponent } from './spinner/spinner.component';
+import { SocketIoModule, SocketIoConfig } from 'ng-socket-io';
+
+const config: SocketIoConfig = { url: 'https://ytser.herokuapp.com/', options: {} };
+//const config: SocketIoConfig = { url: 'http://localhost:3000/', options: {} };
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -21,7 +26,9 @@ import { SpinnerComponent } from './spinner/spinner.component';
   imports: [
     BrowserModule,
     HttpClientModule,
-    FormsModule  ],
+    FormsModule,
+    SocketIoModule.forRoot(config)
+  ],
   providers: [YoutubeService],
   bootstrap: [AppComponent]
 })

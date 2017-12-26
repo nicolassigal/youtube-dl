@@ -8,7 +8,9 @@
   </div>
   <div class="download">
     <button (click)="download(song)" [disabled]="downloading" [disabled]="downloading">
-      <span [innerText]="status == 0 ? 'Download': status == 1 ? 'Downloading...': 'Downloaded!'"></span>
-      <i class="fa fa-download"></i></button>
+      <span *ngIf="!downloading && status == 0">Download <i class="fa fa-download"></i></span>
+      <span *ngIf="downloading && status == 1">Downloading {{progress}}%</span>
+      <span *ngIf="!downloading && status == 2">Downloaded <i class="fa fa-check"></i></span>
+    </button>
   </div>
 </div>
