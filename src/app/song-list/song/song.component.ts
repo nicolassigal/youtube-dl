@@ -27,7 +27,6 @@ export class SongComponent implements OnInit {
     );
   }
 
-
   download = song => {
     this.status = 1;
     this.downloading = true;
