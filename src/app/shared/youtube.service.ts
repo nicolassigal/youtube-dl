@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Subject } from 'rxjs/Subject';
 import { Socket } from 'ng-socket-io';
-
 @Injectable()
 export class YoutubeService  {
   opts = { maxResults: 50, key: 'AIzaSyCnqAFM5z0dsC_gPE-DQeFrQe2PScejMMw' };
@@ -11,6 +10,7 @@ export class YoutubeService  {
   requestSubject: Subject<any> = new Subject<any>();
   downloadSubject: Subject<any> = new Subject<any>();
   queueSubject: Subject<any> = new Subject<any>();
+  streamSubject: Subject<any> = new Subject<any>();
   constructor(private socket: Socket) {
 
    }
@@ -24,6 +24,7 @@ export class YoutubeService  {
   __getResults = () => {
     return this.results;
   }
+
 
   _getlink = (song) => {
     this.socket.emit('download', song.id);

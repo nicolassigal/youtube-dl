@@ -16,6 +16,7 @@ export class SongComponent implements OnInit {
   status = 0;
   enableStop = false;
   progress = 0;
+  streamFile;
   constructor(
     private ytService: YoutubeService,
     private sanitizer: DomSanitizer
@@ -25,6 +26,7 @@ export class SongComponent implements OnInit {
       `https://www.youtube.com/embed/${this.song.id}?autoplay=1`
     );
   }
+
 
   download = song => {
     this.status = 1;
