@@ -3,8 +3,8 @@
       <h3>{{song.title}}</h3>
   </div>
   <div class="images">
-    <img [src]="song.thumbnails.medium.url" (click)="replace = true" *ngIf="!replace" alt="">
-    <iframe id="{{song.id}}" class="player" [src]="song.link" *ngIf="replace" frameborder="0" gesture="media" allow="encrypted-media"  allowfullscreen></iframe>
+    <img [src]="song.thumbnails.medium.url" (click)="replaceVid()" *ngIf="!replace" alt="">
+    <div id="vid_{{vidId}}"></div>
   </div>
   <div class="download">
     <button (click)="download(song)" [disabled]="downloading" [disabled]="downloading">

@@ -1,7 +1,6 @@
 import { DomSanitizer } from "@angular/platform-browser";
 import { Component, Input, OnInit, ViewChild } from "@angular/core";
 import { YoutubeService } from "../../shared/youtube.service";
-
 @Component({
   selector: "yd-song",
   templateUrl: "./song.component.html",
@@ -9,6 +8,7 @@ import { YoutubeService } from "../../shared/youtube.service";
 })
 export class SongComponent implements OnInit {
   @Input("song") song;
+  @Input("vidId") vidId;
   @ViewChild("card") card;
   downloading = false;
   data;
@@ -25,6 +25,17 @@ export class SongComponent implements OnInit {
     this.song.link = this.sanitizer.bypassSecurityTrustResourceUrl(
       `https://www.youtube.com/embed/${this.song.id}?autoplay=1`
     );
+
+    this.ytService.finishedVidSubject.subscribe(id => {
+      if (this.song.id === id){
+        this.replace = false;
+      }
+    })
+  }
+
+  replaceVid = () => {
+    this.replace = true;
+    this.ytService._play(this.vidId, this.song.id);
   }
 
   download = song => {

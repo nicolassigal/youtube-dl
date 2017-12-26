@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
 import { Subject } from 'rxjs/Subject';
 import { Socket } from 'ng-socket-io';
+import * as player from 'yt-player';
+
 @Injectable()
 export class YoutubeService  {
   opts = { maxResults: 50, key: 'AIzaSyCnqAFM5z0dsC_gPE-DQeFrQe2PScejMMw' };
@@ -10,6 +12,8 @@ export class YoutubeService  {
   requestSubject: Subject<any> = new Subject<any>();
   downloadSubject: Subject<any> = new Subject<any>();
   queueSubject: Subject<any> = new Subject<any>();
+  finishedVidSubject: Subject<any> = new Subject<any>();
+  vdPlayer;
   constructor(private socket: Socket) {
 
    }
@@ -18,6 +22,31 @@ export class YoutubeService  {
     const link = document.createElement('a');
     link.href = filePath;
     link.click();
+  }
+
+  _play = (id, song) => {
+    if (this.vdPlayer) {
+      this.finishedVidSubject.next(this.vdPlayer.videoId);
+      this.vdPlayer.destroy();
+    }
+    this.vdPlayer = new player('#vid_' + id, {
+      width: '100%',
+      height: '100%',
+      captions: false,
+      controls: true,
+      fullscreen: true,
+      annotations: false,
+      modestBranding: true,
+      related: false,
+      info: false
+    });
+
+    this.vdPlayer.load(song);
+    this.vdPlayer.play();
+    this.vdPlayer.on('ended', () => {
+      this.finishedVidSubject.next(this.vdPlayer.videoId);
+      this.vdPlayer.destroy();
+    });
   }
 
   __getResults = () => {
