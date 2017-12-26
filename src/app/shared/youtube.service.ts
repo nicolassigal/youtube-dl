@@ -32,9 +32,9 @@ export class YoutubeService  {
      });
     this.socket.on('download-finished', data => {
       //this.downloadFile(`http://localhost:3000/api/download/${data.data.videoTitle}.mp3`)
-      this.downloadFile(`https://ytser.herokuapp.com//api/download/${data.data.videoTitle}.mp3`);
+      this.downloadFile(`https://ytser.herokuapp.com/api/download/${data.data.videoTitle}.mp3`);
     });
-    this.socket.on('queue-changed', data => { console.log(data); this.queueSubject.next(data.size); });
+    this.socket.on('queue-changed', data => { this.queueSubject.next(data.size); });
   }
 
   _search = (query: any) => {
