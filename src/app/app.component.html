@@ -4,3 +4,7 @@
 <div class="content">
   <yd-song-list></yd-song-list>
 </div>
+<footer *ngIf="queue && queue.total">
+    <div class="progress" [ngStyle]="{'width': percentajeStr }"></div>
+    <span>{{queue.finished}} / {{queue.total}} <i class="fa fa-download"></i></span>
+</footer>

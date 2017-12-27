@@ -1,6 +1,7 @@
 <div class="navbar">
   <span class="branding"><a href="/">YT Joy</a></span>
-  <span class="download" *ngIf="size">{{size}} <i class="fa fa-download"></i> </span>
+  <div class="queue" *ngIf="queueList">
+  </div>
   <div class="menu">
     <yd-search-box></yd-search-box>
   </div>
