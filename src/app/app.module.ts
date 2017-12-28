@@ -10,9 +10,10 @@ import { YoutubeService } from './shared/youtube.service';
 import { NavbarComponent } from './navbar/navbar.component';
 import { SpinnerComponent } from './spinner/spinner.component';
 import { SocketIoModule, SocketIoConfig } from 'ng-socket-io';
+import { SpotListComponent } from './spot-list/spot-list.component';
 
-const config: SocketIoConfig = { url: 'https://ytser.herokuapp.com/', options: {} };
-//const config: SocketIoConfig = { url: 'http://localhost:3000/', options: {} };
+//const config: SocketIoConfig = { url: 'https://ytser.herokuapp.com/', options: {} };
+const config: SocketIoConfig = { url: 'http://localhost:3000/', options: {} };
 
 @NgModule({
   declarations: [
@@ -21,7 +22,8 @@ const config: SocketIoConfig = { url: 'https://ytser.herokuapp.com/', options: {
     SongListComponent,
     SongComponent,
     NavbarComponent,
-    SpinnerComponent
+    SpinnerComponent,
+    SpotListComponent
   ],
   imports: [
     BrowserModule,

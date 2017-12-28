@@ -13,7 +13,8 @@ export class SongListComponent implements OnInit {
   ngOnInit() {
     this.results = this.ytService.__getResults();
     this.ytService.searchSubject.subscribe((data) => {
-      this.results = data.results;
+      window.scroll(0, 0);
+      this.results = data;
     });
   }
 

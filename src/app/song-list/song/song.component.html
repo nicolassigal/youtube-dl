@@ -1,4 +1,4 @@
-<div class="card" *ngIf="song.kind == 'youtube#video'"  #card>
+<div class="card" *ngIf="song && song.kind == 'youtube#video'"  #card>
   <div class="header">
       <h3>{{song.title}}</h3>
   </div>

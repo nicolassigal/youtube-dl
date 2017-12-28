@@ -11,6 +11,8 @@ export class AppComponent implements OnInit{
   queue;
   percentaje = 0;
   percentajeStr = "0%";
+  spottube = [];
+  playlistLength;
   constructor (private socket: Socket, private ytService: YoutubeService) {}
   ngOnInit() {
     this.socket.on('session', ssid => sessionStorage.setItem('ssid', ssid));

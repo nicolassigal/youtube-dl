@@ -1,0 +1,9 @@
+<div class="playlist">
+  <ul>
+    <li *ngFor="let playlist of playlists" class="item" (click)="getList(playlist)">
+      <img [src]="playlist.images[0].url" alt="">
+      <span>{{playlist.name}}</span>
+    </li>
+  </ul>
+
+</div>
