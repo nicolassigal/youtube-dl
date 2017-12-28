@@ -1,0 +1,17 @@
+<ul *ngIf="!video">
+  <button>Download All</button>
+  <li *ngFor="let item of list" class="item">
+    <div class="left">
+        <div class="image">
+          <img [src]="item.images[0].url" alt="">
+        </div>
+        <div class="description">
+          <span>{{item.name}}</span>
+        </div>
+    </div>
+    <div class="right">
+        <span><i class="fa fa-download" (click)="getList(item, 'track')"></i></span>
+    </div>
+  </li>
+</ul>
+<yd-song *ngIf="video" [song]="video" [vidId]="video.id"></yd-song>

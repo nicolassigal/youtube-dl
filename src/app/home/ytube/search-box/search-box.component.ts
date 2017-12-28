@@ -18,6 +18,7 @@ export class SearchBoxComponent implements OnInit {
 
 
   search = () => {
+    if (this.query) {
     this.loading = true;
     this.searchElement.nativeElement.blur();
     this.ytService._search(this.query);
@@ -25,6 +26,7 @@ export class SearchBoxComponent implements OnInit {
       this.router.navigate(['list'], { relativeTo: this.route});
       this.loading = false;
     });
+  }
   }
 
 }

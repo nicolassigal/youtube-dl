@@ -1,3 +1,4 @@
+import { SpotService } from './../../spot-list/spot.service';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -6,8 +7,8 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./spottube.component.scss']
 })
 export class SpottubeComponent implements OnInit {
-
-  constructor() { }
+  loading = false;
+  constructor(private spotifyService: SpotService) { }
 
   ngOnInit() {
   }

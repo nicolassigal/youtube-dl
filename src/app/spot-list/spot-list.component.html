@@ -1,14 +1,4 @@
 <div class="playlist">
-  <ul *ngIf="type !== 'track'">
-    <li *ngFor="let playlist of playlists" class="item" (click)="getList(playlist)">
-      <img [src]="playlist.images[0].url" alt="">
-      <span>{{playlist.name}}</span>
-    </li>
-  </ul>
-  <ul *ngIf="type == 'track'">
-    <li *ngFor="let playlist of playlists" class="item" (click)="getList(playlist)">
-      <img [src]="playlist.album.images[0].url" alt="">
-      <span>{{playlist.name}}</span>
-    </li>
-  </ul>
+  <router-outlet></router-outlet>
+  <yd-spinner *ngIf="loading"></yd-spinner>
 </div>
