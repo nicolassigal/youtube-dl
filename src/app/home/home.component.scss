@@ -1,0 +1,70 @@
+@import './../../styles.scss';
+
+.home {
+  .tabs {
+    position: fixed;
+    top:0;
+    left:0;
+    right:0;
+    height: 60px;
+    width: 100%;
+    background: $pink-primary-color;
+    color: $pink-font-color;
+    ul {
+      padding: 0;
+      margin: 0;
+      height: 60px;
+      display: flex;
+      flex-direction: row;
+      justify-content: space-around;
+      align-content: center;
+      align-items: center;
+      a {
+        height:55px;
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        color: $pink-font-color;
+        text-decoration: none;
+        &.active {
+          li {
+            padding-top:5px;
+          }
+          border-bottom: 5px solid white;
+        }
+        li {
+          list-style: none;
+        }
+      }
+    }
+  }
+  footer {
+    position: fixed;
+    bottom:0;
+    left:0;
+    right:0;
+    height: 30px;
+    font-size: 12px;
+    background-color: lighten(#ef4581, 10%);
+    color: white;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    align-content: center;
+    align-items: center;
+    padding-right:15px;
+    .progress {
+      position: absolute;
+      top:0;
+      left:0;
+      bottom:0;
+      opacity: 1;
+      z-index: -1;
+      width:0%;
+      background-color: darken(#ef4581, 10%);
+      transition: width 3s ease-in-out;
+    }
+  }
+}

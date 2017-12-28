@@ -1,0 +1,15 @@
+<div class="home">
+  <div class="tabs">
+    <ul>
+      <a routerLink="/spottube" routerLinkActive="active"><li>Spotify</li></a>
+      <a routerLink="/ytube" routerLinkActive="active"><li>Youtube</li></a>
+    </ul>
+  </div>
+  <router-outlet></router-outlet>
+  <footer *ngIf="queue && queue.total">
+    <div class="progress" [ngStyle]="{'width': percentajeStr }"></div>
+    <span>{{queue.finished}} / {{queue.total}}
+      <i class="fa fa-download"></i>
+    </span>
+  </footer>
+</div>

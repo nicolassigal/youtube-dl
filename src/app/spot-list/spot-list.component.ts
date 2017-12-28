@@ -10,11 +10,15 @@ export class SpotListComponent implements OnInit {
   spottube = [];
   playlists = [];
   playlistLength = 0;
+  type: string;
   constructor(private socket: Socket, private ytService: YoutubeService) { }
 
   ngOnInit() {
-    this.search({query: 'galantis', type: 'playlist'});
-    this.socket.emit('spotify-get-playlist', 'dixidix');
+    this.socket.on('spotify-search', results => {
+      this.playlists = [];
+      this.playlists = results.list;
+      this.type = results.type;
+    });
     this.socket.on('spotify-get-playlist', data => this.playlists = data.items);
     this.socket.on('spotify-search-result', data => console.log(data));
     this.socket.on('spotify-search-list-length', data => {
@@ -26,14 +30,6 @@ export class SpotListComponent implements OnInit {
       if (this.spottube.length === this.playlistLength) {
         this.ytService.searchSubject.next(this.spottube);
       }
-    });
-  }
-
-  search = (query) => {
-    this.playlists = [];
-    this.socket.emit('spotify-search', query);
-    this.socket.on('spotify-search', results => {
-      this.playlists = results.playlists.items;
     });
   }
 

@@ -1,0 +1,15 @@
+<div class="search-box">
+    <form>
+      <input type="text" [(ngModel)]="query" #searchElement name="query" placeholder="Search" autocomplete="off">
+      <select [(ngModel)]="type" name="type">
+        <option value="track">Track</option>
+        <option value="artist">Artist</option>
+        <option value="playlist">Playlist</option>
+        <option value="album">Album</option>
+      </select>
+      <button type="submit" (click)="search()">
+        <i class="fa fa-search"></i>
+      </button>
+    </form>
+    <yd-spinner *ngIf="loading"></yd-spinner>
+  </div>

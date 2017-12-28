@@ -1,0 +1,67 @@
+@import './../../../../styles.scss';
+
+.search-box {
+  padding-top: 2%;
+  position: fixed;
+  left: 0;
+  right: 0;
+  top:60px;
+  padding: 4% 2%;
+  background: darken($pink-bg-color, 5%);
+  select {
+    position: absolute;
+    top: 17px;
+    right: 60px;
+    height: 40px;
+    background: white;
+    border: none;
+    border-left: 1px solid lightgray;
+    border-right: 1px solid lightgray;
+    color: lightgray;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    &:active, &:focus, &:active:focus {
+      outline: none;
+    }
+  }
+  input {
+    &::-webkit-input-placeholder { /* Chrome/Opera/Safari */
+      color:lightgray;
+      font-size: 16px;
+    }
+    width: 64%;
+    box-shadow: 2px 2px 7px #2e2e2e;
+    padding: 1% 32% 0% 3%;
+    background: white;
+    border: none;
+    font-size: 16px;
+    height: 40px;
+    &:active, &:focus, &:active:focus {
+      border:none;
+      outline: none;
+    }
+  }
+  button {
+    position: absolute;
+    top: 16px;
+    right: 13px;
+    border: 0;
+    background: white;
+    padding: 15px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 40px;
+    &:active, &:focus, &:active:focus {
+      border:none;
+      outline: none;
+    }
+    i {
+      font-size: 16px;
+      color: lightgray;
+    }
+  }
+}

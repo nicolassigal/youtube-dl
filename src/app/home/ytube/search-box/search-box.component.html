@@ -1,0 +1,9 @@
+<div class="search-box">
+  <form>
+    <input type="text" [(ngModel)]="query" #searchElement name="query" placeholder="Search" autocomplete="off">
+    <button type="submit" (click)="search()">
+      <i class="fa fa-search"></i>
+    </button>
+  </form>
+  <yd-spinner *ngIf="loading"></yd-spinner>
+</div>

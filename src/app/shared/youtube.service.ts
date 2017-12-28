@@ -21,12 +21,15 @@ export class YoutubeService  {
      });
     this.socket.on('download-finished', data => {
       let ssid = sessionStorage.getItem('ssid');
-      this.downloadFile(`http://localhost:3000/api/download/${ssid}/${data.data.videoTitle.replace(",","")}.mp3`);
-      //this.downloadFile(`https://ytser.herokuapp.com/api/download/${ssid}/${data.data.videoTitle.replace(",","")}.mp3`);
+      //this.downloadFile(`http://localhost:3000/api/download/${ssid}/${data.data.videoTitle.replace(",","")}.mp3`);
+      this.downloadFile(`https://ytser.herokuapp.com/api/download/${ssid}/${data.data.videoTitle.replace(",","")}.mp3`);
       this.queue.finished = this.queue.finished + 1;
       this.queueSubject.next(this.queue);
     });
-    this.socket.on('search', data => this.searchSubject.next(data.results));
+    this.socket.on('search', data => {
+      this.results = data.results;
+      this.searchSubject.next(data.results);
+    });
 
   }
 
