@@ -14,15 +14,16 @@ export class YoutubeService  {
   finishedVidSubject: Subject<any> = new Subject<any>();
   queueSubject: Subject<any> = new Subject<any>();
   vdPlayer;
-  queue = {finished: 0, total: 0};
+  queue = {finished: 0, total: 0, items: []};
   constructor(private socket: Socket) {
     this.socket.on('download-progress', (data) => {
       this.downloadSubject.next({id: data.id, progress: Math.floor(data.progress.progress.percentage)});
      });
     this.socket.on('download-finished', data => {
       let ssid = sessionStorage.getItem('ssid');
-      //this.downloadFile(`http://localhost:3000/api/download/${ssid}/${data.data.videoTitle.replace(",","")}.mp3`);
-      this.downloadFile(`https://ytser.herokuapp.com/api/download/${ssid}/${data.data.videoTitle.replace(",","")}.mp3`);
+      let title = data.data.videoTitle.replace(/[^a-zA-Z ]/g, '');
+      //this.downloadFile(`http://localhost:3000/api/download/${ssid}/${title}.mp3`);
+      this.downloadFile(`https://ytser.herokuapp.com/api/download/${ssid}/${title}.mp3`);
       this.queue.finished = this.queue.finished + 1;
       this.queueSubject.next(this.queue);
     });
@@ -40,7 +41,7 @@ export class YoutubeService  {
   }
 
   resetQueue = () => {
-    this.queue = {finished: 0, total: 0};
+    this.queue = {finished: 0, total: 0, items: []};
   }
 
   _play = (id, song) => {

@@ -3,7 +3,7 @@
       <h3>{{song.title}}</h3>
   </div>
   <div class="images">
-    <img [src]="song.thumbnails.medium.url" (click)="replaceVid()" *ngIf="!replace" alt="">
+    <img [src]="song.thumbnails.medium.url" (click)="replaceVid()" *ngIf="!replace && !noImg" alt="">
     <div id="vid_{{vidId}}"></div>
   </div>
   <div class="download">

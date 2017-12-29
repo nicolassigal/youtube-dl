@@ -7,6 +7,9 @@
   </div>
   <router-outlet></router-outlet>
   <footer *ngIf="queue && queue.total">
+    <div class="spinner" *ngIf="queue.finished !== queue.total">
+      <i class="fa fa-spinner fa-spin"></i>
+    </div>
     <div class="progress" [ngStyle]="{'width': percentajeStr }"></div>
     <span>{{queue.finished}} / {{queue.total}}
       <i class="fa fa-download"></i>

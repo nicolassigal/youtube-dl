@@ -1,14 +1,16 @@
 import { DomSanitizer } from "@angular/platform-browser";
-import { Component, Input, OnInit, ViewChild } from "@angular/core";
+import { Component, Input, OnInit, ViewChild, AfterViewInit } from "@angular/core";
 import { YoutubeService } from "../../shared/youtube.service";
 @Component({
   selector: "yd-song",
   templateUrl: "./song.component.html",
   styleUrls: ["./song.component.scss"]
 })
-export class SongComponent implements OnInit {
+export class SongComponent implements OnInit, AfterViewInit {
   @Input("song") song;
   @Input("vidId") vidId;
+  @Input("noImg") noImg = false;
+
   @ViewChild("card") card;
   downloading = false;
   data;
@@ -53,5 +55,12 @@ export class SongComponent implements OnInit {
         }
       }
     });
+  }
+
+  ngAfterViewInit() {
+    if (this.noImg) {
+      this.replace = true;
+      this.replaceVid();
+    }
   }
 }
