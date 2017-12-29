@@ -41,6 +41,7 @@ export class YoutubeService  {
 
   resetQueue = () => {
     this.queue = {finished: 0, total: 0, items: []};
+    this.queueSubject.next(this.queue);
   }
 
   _play = (id, song) => {

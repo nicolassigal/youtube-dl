@@ -16,7 +16,7 @@
     "copy": "copyfiles manifest.json dist",
     "git": "git add . && git commit -m 'asd' && git push -u origin master",
     "heroku:logs": "heroku logs -a ytjoy",
-    "deploy": "npm run build && npm run sw && npm run copy  && npm run git && npm run heroku:logs"
+    "deploy": "npm run build && npm run sw && npm run copy  && npm run git"
   },
   "private": true,
   "dependencies": {
