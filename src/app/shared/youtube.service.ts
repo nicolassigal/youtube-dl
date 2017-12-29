@@ -22,7 +22,6 @@ export class YoutubeService  {
     this.socket.on('download-finished', data => {
       let ssid = sessionStorage.getItem('ssid');
       let title = data.data.videoTitle.replace(/[^a-zA-Z ]/g, '');
-      //this.downloadFile(`http://localhost:3000/api/download/${ssid}/${title}.mp3`);
       this.downloadFile(`https://ytser.herokuapp.com/api/download/${ssid}/${title}.mp3`);
       this.queue.finished = this.queue.finished + 1;
       this.queueSubject.next(this.queue);

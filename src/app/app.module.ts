@@ -18,7 +18,6 @@ import { SearchBoxComponent } from './home/ytube/search-box/search-box.component
 import { FormComponent } from './home/spottube/form/form.component';
 
 const config: SocketIoConfig = { url: 'https://ytser.herokuapp.com/', options: {} };
-//const config: SocketIoConfig = { url: 'http://localhost:3000/', options: {} };
 
 @NgModule({
   declarations: [
