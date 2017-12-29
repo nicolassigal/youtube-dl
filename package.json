@@ -14,8 +14,9 @@
     "e2e": "ng e2e",
     "sw": "sw-precache --root=dist --config=sw-precache-config.js",
     "copy": "copyfiles manifest.json dist",
-    "git": "git add . && git commit -m 'asd' && git push heroku master",
-    "deploy": "npm run build && npm run sw && npm run copy && npm run git"
+    "git": "git add . && git commit -m 'asd' && git push -u origin master",
+    "heroku:logs": "heroku logs -a ytjoy",
+    "deploy": "npm run build && npm run sw && npm run copy  && npm run git | heroku:logs"
   },
   "private": true,
   "dependencies": {
