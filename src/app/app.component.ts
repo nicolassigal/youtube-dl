@@ -15,7 +15,7 @@ export class AppComponent implements OnInit{
       if ((<any>window).Notification && (<any>Notification).permission !== 'denied') {
         Notification.requestPermission(status => {  // status is "granted", if accepted by user
         if (status === 'granted') {
-          let notification = new Notification('YT Download', {body: `Downloading (${this.queue.finished}/${this.queue.total})`});
+          let notification = new Notification('YT Download', {body: 'starting app'});
         }
         });
       }

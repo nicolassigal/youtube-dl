@@ -12,5 +12,14 @@
 <script src="https://use.fontawesome.com/cf518c3a3a.js"></script>
 <body>
   <yd-root></yd-root>
+  <script>
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker.register('/service-worker.js').then(function(registration) {
+        console.log('Service Worker registered');
+      }).catch(function(err) {
+        console.log('Service Worker registration failed: ', err);
+      });
+    }
+  </script>
 </body>
 </html>
