@@ -12,6 +12,7 @@ export class PlaylistComponent implements OnInit {
   constructor(private spotifyService: SpotService, private router: Router, private route: ActivatedRoute) { }
 
   ngOnInit() {
+    window.scroll(0, 0);
     this.list = this.spotifyService.getPlaylist();
     this.spotifyService.playlistSubject.subscribe(playlist => {
         this.list = playlist;

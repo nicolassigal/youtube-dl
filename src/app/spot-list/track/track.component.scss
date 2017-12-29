@@ -6,11 +6,11 @@
   align-items: center;
   .downloadBtn {
     &:first-child {
-      border-radius: 3px 0px 0px 3px;
+      border-radius: 3px 0px 0px 0px;
       border-right: 1px solid darken($pink-primary-color, 10%);
     }
     &:last-child {
-      border-radius: 0px 3px 3px 0px;
+      border-radius: 0px 3px 0px 0px;
     }
     width: 50%;
     height: 40px;
@@ -19,7 +19,7 @@
     padding-top:5px;
     border:none;
     outline: none;
-    &:focus {
+    &:active {
       background: darken($pink-primary-color, 10%);
       border-bottom: 5px solid darken($pink-primary-color, 15%);
     }
@@ -36,14 +36,18 @@ ul {
 }
 .item {
   list-style: none;
-  border-radius: 3px;
+  &:first-child {
+    border-radius: 0px;
+  }
+  &:last-child {
+    border-radius: 0px 3px 3px 0px;
+  }
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
 
   height: 50px;
-  margin: 2% 0%;
   padding: 0;
   background: white;
   .left {
@@ -52,6 +56,14 @@ ul {
     justify-content: flex-start;
     align-items: center;
     width: 85%;
+    input[type="checkbox"] {
+      margin-left: 10px;
+      background: white;
+      border-radius: 3px;
+      width: 15px;
+      height: 15px;
+      border: lightgray;
+    }
     .image{
       width: 15%;
       padding-top: 5px;
@@ -69,7 +81,7 @@ ul {
         word-wrap: break-word;
         text-overflow: ellipsis;
         text-align: left;
-        font-size:12px;
+        font-size:14px;
       }
     }
   }

@@ -1,9 +1,15 @@
-<ul *ngIf="!video">
+<ul>
   <div class="button-set" *ngIf="list.length">
-    <button class="downloadBtn" (click)="downloadAll()" *ngIf="list.length" [disabled]="downloading">Download All ({{downloadlist.length}})</button>
-    <button class="downloadBtn" (click)="toggleMark()" *ngIf="list.length" [disabled]="downloading">Mark</button>
+    <button class="downloadBtn" (click)="downloadAll()" *ngIf="list.length" [disabled]="downloading">
+      <span *ngIf="!downloading && !markEnable">Download All ({{downloadlist.length}})</span>
+      <span *ngIf="!downloading && markEnable">Download Marked Tracks ({{downloadlist.length}})</span>
+      <span *ngIf="downloading">Downloading</span>
+    </button>
+    <button class="downloadBtn" (click)="toggleMark()"  *ngIf="list.length" [disabled]="downloading">
+      <span>Toggle Mark</span>
+    </button>
   </div>
-  <li *ngFor="let item of list" class="item" (click)="mark(item)">
+  <li *ngFor="let item of list" class="item" (click)="getAction(item)">
     <div class="left">
         <div *ngIf="markEnable">
           <input type="checkbox" (change)="mark(item)" [(ngModel)]="item.checked" name="" value="false">
@@ -16,8 +22,7 @@
         </div>
     </div>
     <div class="right">
-        <span><i class="fa fa-download" (click)="getTrack(item, 'track')"></i></span>
+        <span><i class="fa fa-download"></i></span>
     </div>
   </li>
 </ul>
-<yd-song *ngIf="video" [song]="video" [vidId]="video.id" [noImg]="'true'"></yd-song>

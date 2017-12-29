@@ -22,50 +22,53 @@ export class TrackComponent implements OnInit {
     private ytService: YoutubeService) { }
 
   ngOnInit() {
+    window.scroll(0, 0);
     this.ytService.queueSubject.subscribe( queue => {
       if (queue.finished === queue.total) {
         this.downloading = false;
+        this.downloadlist = [];
+        this.ytService.resetQueue();
       } else {
         this.downloading = true;
       }
     });
-    this.list = this.spotifyService.getTracks();
-    this.list.forEach(item => {
-      item.checked = false;
-    });
-    this.downloadlist = this.list;
+    this.parseList(this.spotifyService.getTracks());
     this.spotifyService.trackSubject.subscribe(result => {
-      this.video = null;
-      if (!result.tracks) {
-        result.forEach(element => {
-          element.images = element.album.images;
-        });
-        this.list = result;
-        this.list.forEach(item => {
-          item.checked = false;
-        });
-        this.downloadlist = this.list;
-      }
-      if (result.tracks) {
-        result = result.tracks.items.map(element => {
-          if(element.track){
-            element.images = element.track.album.images;
-            element.name = element.track.name;
-            element.href = element.track.href;
-          } else {
-            element.images = result.images;
-            element.name = element.name;
-          }
-
-          return element;
-        });
-        this.list = result;
-        this.list.forEach(item => {
-          item.checked = false;
-        });
-        this.downloadlist = this.list;
-      }
+      this.parseList(result);
     });
+  }
+
+  parseList = (result) => {
+    this.video = null;
+    if (!result.tracks) {
+      result.forEach(element => {
+        element.images = element.album.images;
+      });
+      this.list = result;
+      this.list.forEach(item => {
+        item.checked = false;
+      });
+      this.downloadlist = this.list;
+    }
+    if (result.tracks) {
+      result = result.tracks.items.map(element => {
+        if(element.track){
+          element.images = element.track.album.images;
+          element.name = element.track.name;
+          element.href = element.track.href;
+        } else {
+          element.images = result.images;
+          element.name = element.name;
+        }
+
+        return element;
+      });
+      this.list = result;
+      this.list.forEach(item => {
+        item.checked = false;
+      });
+      this.downloadlist = this.list;
+    }
   }
 
   downloadAll = () => {
@@ -98,6 +101,14 @@ export class TrackComponent implements OnInit {
     }
   }
 
+  getAction = (item) => {
+    if (this.markEnable) {
+      this.mark(item);
+    } else {
+      this.getTrack(item);
+    }
+  }
+
   mark = (item) => {
     if (this.markEnable) {
       item.checked = !item.checked;
@@ -114,10 +125,13 @@ export class TrackComponent implements OnInit {
   }
 
   getTrack = (track) => {
-    if (!track.artists && track.track.artists.length){
+    if (!track.artists && track.track.artists.length) {
       track.artists = track.track.artists;
     }
     this.socket.emit('spotify-track-search', track);
-    this.socket.on('search-spotube', data => this.video = data);
+    this.socket.on('search-spotube', data => {
+      this.spotifyService.setVideo(data);
+      this.router.navigate(['player'], {relativeTo: this.route.parent});
+    });
   }
 }

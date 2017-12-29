@@ -11,6 +11,7 @@ export class ArtistComponent implements OnInit {
   constructor(private spotifyService: SpotService, private router: Router, private route: ActivatedRoute) { }
   list = [];
   ngOnInit() {
+    window.scroll(0, 0);
     this.list = this.spotifyService.getArtists();
     this.spotifyService.artistSubject.subscribe(artists => {
         this.list = artists;

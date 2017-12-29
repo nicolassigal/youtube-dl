@@ -22,7 +22,7 @@ export class SpotService {
   playlistLength = 0;
   fromAlbum = false;
   album;
-
+  video: any;
   constructor(private socket: Socket, private ytService: YoutubeService) {
     this.socket.on('spotify-search', results => this.setResults(results));
     this.socket.on('spotify-get-playlist', data => this.playlists = data.items);
@@ -52,6 +52,14 @@ export class SpotService {
 
   getTracks = () => {
     return this.tracks;
+  }
+
+  setVideo = (video) => {
+    this.video = video;
+  }
+
+  getVideo = () => {
+    return this.video;
   }
 
   getPlaylist = () => {

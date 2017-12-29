@@ -9,6 +9,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { HomeComponent } from './home/home.component';
 import { SpottubeComponent } from './home/spottube/spottube.component';
 import { PlaylistComponent } from './spot-list/playlist/playlist.component';
+import { PlayerComponent } from './spot-list/player/player.component';
 
 const APP_ROUTES: Routes = [
   { path: '', component: HomeComponent, children: [
@@ -16,7 +17,8 @@ const APP_ROUTES: Routes = [
       { path: 'playlist', component: PlaylistComponent },
       { path: 'track', component: TrackComponent },
       { path: 'album', component: AlbumComponent },
-      { path: 'artist', component: ArtistComponent }
+      { path: 'artist', component: ArtistComponent },
+      { path: 'player', component: PlayerComponent }
     ] },
     { path: 'ytube', component: YtubeComponent, children: [
       { path: 'list', component: VideoListComponent }
@@ -40,5 +42,6 @@ export const routingComponents = [
   PlaylistComponent,
   TrackComponent,
   AlbumComponent,
-  ArtistComponent
+  ArtistComponent,
+  PlayerComponent
 ];

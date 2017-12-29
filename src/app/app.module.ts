@@ -16,10 +16,6 @@ import { SpottubeComponent } from './home/spottube/spottube.component';
 import { YtubeComponent } from './home/ytube/ytube.component';
 import { SearchBoxComponent } from './home/ytube/search-box/search-box.component';
 import { FormComponent } from './home/spottube/form/form.component';
-import { TrackComponent } from './spot-list/track/track.component';
-import { AlbumComponent } from './spot-list/album/album.component';
-import { ArtistComponent } from './spot-list/artist/artist.component';
-import { PlaylistComponent } from './spot-list/playlist/playlist.component';
 
 const config: SocketIoConfig = { url: 'https://ytser.herokuapp.com/', options: {} };
 //const config: SocketIoConfig = { url: 'http://localhost:3000/', options: {} };
@@ -33,11 +29,7 @@ const config: SocketIoConfig = { url: 'https://ytser.herokuapp.com/', options: {
     SpinnerComponent,
     SpotListComponent,
     routingComponents,
-    FormComponent,
-    TrackComponent,
-    AlbumComponent,
-    ArtistComponent,
-    PlaylistComponent
+    FormComponent
   ],
   imports: [
     BrowserModule,

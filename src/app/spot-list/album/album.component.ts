@@ -11,6 +11,7 @@ export class AlbumComponent implements OnInit {
   constructor(private spotifyService: SpotService, private router: Router, private route: ActivatedRoute) { }
 
   ngOnInit() {
+    window.scroll(0, 0);
     this.list = this.spotifyService.getAlbums();
     this.spotifyService.albumSubject.subscribe(playlist => {
         this.list = playlist;

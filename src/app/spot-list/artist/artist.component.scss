@@ -4,13 +4,17 @@ ul {
 }
 .item {
   list-style: none;
-  border-radius: 3px;
+  &:first-child {
+    border-radius: 3px 3px 0px 0px;
+  }
+  &:last-child {
+    border-radius: 0px 3px 3px 0px;
+  }
   display: flex;
   flex-direction: row;
   justify-content: flex-start;
   align-items: center;
   height: 50px;
-  margin: 2% 0%;
   padding: 2%;
   background: white;
   img {

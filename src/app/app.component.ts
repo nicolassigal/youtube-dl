@@ -9,8 +9,25 @@ import { Socket } from 'ng-socket-io';
 export class AppComponent implements OnInit{
   title = 'Downloader';
   spottube = [];
+  queue;
   constructor (private socket: Socket, private ytService: YoutubeService) {}
   ngOnInit() {
+    this.ytService.queueSubject.subscribe(data => {
+      this.queue = data;
+    });
+    document.addEventListener('visibilitychange', this.handlePush);
     this.socket.on('session', ssid => sessionStorage.setItem('ssid', ssid));
+  }
+
+  handlePush = (evt) => {
+    if (this.queue && this.queue.finished < this.queue.total) {
+      if ((<any>window).Notification) {
+        Notification.requestPermission(status => {  // status is "granted", if accepted by user
+          let n = new Notification('Downloading', {
+            body: `Downloading (${this.queue.finished}/${this.queue.total})`
+          });
+        });
+      }
+    }
   }
 }
