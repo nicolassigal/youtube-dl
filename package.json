@@ -12,7 +12,10 @@
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
-    "sw": "sw-precache --root=dist --config=sw-precache-config.js"
+    "sw": "sw-precache --root=dist --config=sw-precache-config.js",
+    "copy": "copyfiles manifest.json dist",
+    "git": "git add . && git commit -m 'asd' && git push -u origin master",
+    "deploy": "npm run build && npm run sw && npm run copy && npm run git"
   },
   "private": true,
   "dependencies": {
@@ -42,6 +45,8 @@
     "@types/jasminewd2": "~2.0.2",
     "@types/node": "~6.0.60",
     "codelyzer": "^4.0.1",
+    "copyfiles": "^1.2.0",
+    "cpy-cli": "^1.0.1",
     "jasmine-core": "~2.6.2",
     "jasmine-spec-reporter": "~4.1.0",
     "karma": "~1.7.0",
