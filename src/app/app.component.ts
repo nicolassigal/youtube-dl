@@ -12,6 +12,13 @@ export class AppComponent implements OnInit{
   queue;
   constructor (private socket: Socket, private ytService: YoutubeService) {}
   ngOnInit() {
+      if ((<any>window).Notification && (<any>Notification).permission !== 'denied') {
+        Notification.requestPermission(status => {  // status is "granted", if accepted by user
+        if (status === 'granted') {
+          let notification = new Notification('YT Download', {body: `Downloading (${this.queue.finished}/${this.queue.total})`});
+        }
+        });
+      }
     this.ytService.queueSubject.subscribe(data => {
       this.queue = data;
     });
@@ -21,7 +28,7 @@ export class AppComponent implements OnInit{
 
   handlePush = (evt) => {
     if (this.queue && this.queue.finished < this.queue.total) {
-      if ((<any>window).Notification) {
+      if ((<any>window).Notification && (<any>Notification).permission !== 'denied') {
         Notification.requestPermission(status => {  // status is "granted", if accepted by user
           let n = new Notification('Downloading', {
             body: `Downloading (${this.queue.finished}/${this.queue.total})`

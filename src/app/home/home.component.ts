@@ -18,7 +18,13 @@ export class HomeComponent implements OnInit {
   ngOnInit() {
     this.ytService.queueSubject.subscribe( queue => {
       this.queue = queue;
-
+      if (this.queue.total === this.queue.finished) {
+        setTimeout(() => {
+          if (this.queue.total === this.queue.finished) {
+            this.queue = null;
+          }
+        }, 36000);
+      }
       if (this.percentaje >= 100) {
         this.percentaje = 0;
         this.percentajeStr = this.percentaje + '%';
